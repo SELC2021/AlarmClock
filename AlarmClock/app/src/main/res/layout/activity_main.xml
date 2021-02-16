@@ -16,7 +16,8 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:onClick="makeNoise()"
+        android:id="@+id/Noise"
+        android:onClick="makeNoise"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_margin="10dp"

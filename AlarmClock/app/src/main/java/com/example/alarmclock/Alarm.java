@@ -1,7 +1,8 @@
 package com.example.alarmclock;
 
 public class Alarm {
-    public static void makeNoise(){
+    public void makeNoise(android.view.View view){
+
 
     }
 }
