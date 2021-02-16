@@ -15,4 +15,14 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <Button
+        android:onClick="makeNoise()"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_margin="10dp"
+        tools:layout_editor_absoluteX="134dp"
+        tools:layout_editor_absoluteY="104dp"
+        android:text="Noise"
+
+        />
 </androidx.constraintlayout.widget.ConstraintLayout>
