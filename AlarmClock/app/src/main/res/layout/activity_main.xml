@@ -24,7 +24,16 @@
         tools:layout_editor_absoluteX="134dp"
         tools:layout_editor_absoluteY="104dp"
         android:text="@string/noise"
-
-
         />
+    <Button
+        android:id="@+id/StopNoise"
+        android:onClick="stopNoise"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_margin="10dp"
+        tools:layout_editor_absoluteX="134dp"
+        tools:layout_editor_absoluteY="104dp"
+        android:text="Stop Noise"
+        />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
