@@ -23,7 +23,8 @@
         android:layout_margin="10dp"
         tools:layout_editor_absoluteX="134dp"
         tools:layout_editor_absoluteY="104dp"
-        android:text="Noise"
+        android:text="@string/noise"
+
 
         />
 </androidx.constraintlayout.widget.ConstraintLayout>
