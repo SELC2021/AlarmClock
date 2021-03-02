@@ -19,11 +19,25 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:orientation="horizontal">
+
         <Button
-        android:id="@+id/b1"
+            android:id="@+id/b1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:backgroundTint="#808080"
+            android:text="back"></Button>
+
+        <Button
+        android:id="@+id/b2"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="1"    ></Button>
+        android:layout_weight="1"
+        android:backgroundTint="#808080"
+        android:text="Confirm"
+        ></Button>
+
+
 
     </LinearLayout>
 </LinearLayout>
