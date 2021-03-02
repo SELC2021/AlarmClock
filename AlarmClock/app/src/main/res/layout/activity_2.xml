@@ -8,17 +8,33 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
+        android:text="ALARM PAGE"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
 
+
+
+<!--    <EditText-->
+<!--        android:id="@+id/editTextTime"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:padding="5dp"-->
+<!--        android:gravity="center_horizontal"-->
+<!--        android:background="#333"-->
+<!--        android:textColor="#fff" />-->
     <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
+        android:gravity="center_horizontal"
         android:layout_height="wrap_content"
         android:text="Set Alarm"
-        tools:layout_editor_absoluteX="120dp"
-        tools:layout_editor_absoluteY="518dp" />
+        android:background="#333"
+        android:textColor="#fff"
+
+        android:onClick="showTimePickerDialog" />
+
+
+    android:hint="Set Time"
+        android:inputType="time" />
     android:onClick="sendMessage" />
 
 </RelativeLayout>
