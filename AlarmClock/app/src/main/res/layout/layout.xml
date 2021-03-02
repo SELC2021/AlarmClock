@@ -26,6 +26,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:backgroundTint="#808080"
+            android:margin="100dp"
             android:text="back"></Button>
 
         <Button
@@ -33,6 +34,7 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
+        android:margin="10dp"
         android:backgroundTint="#808080"
         android:text="Confirm"
         ></Button>
