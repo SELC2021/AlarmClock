@@ -13,11 +13,12 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import java.util.Calendar;
+import java.util.Date;
 
+/**
+ * inputTime recieves the time desired for when the alarm is set
+ */
 public class Activity2 extends AppCompatActivity {
-    /**
-     * inputTime recieves the time desired for when the alarm is set
-     */
     int inputTime;
     private Button inpuTime;
 
@@ -25,6 +26,7 @@ public class Activity2 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_2);
+
 
       //  inpuTime = (Button) findViewById(R.id.inputTime);
 
@@ -35,14 +37,19 @@ public class Activity2 extends AppCompatActivity {
             showText(String.valueOf(inputTime));
 
     }
+
+    /**
+     * Used to create the clock and store the time given by the user
+     *
+     */
     public static class TimePickerFragment extends DialogFragment
             implements TimePickerDialog.OnTimeSetListener {
     @Override
-
     public Dialog onCreateDialog(Bundle saveTime) {
-        final Calendar c = Calendar.getInstance();
-        int hour = c.get(Calendar.HOUR_OF_DAY);
-        int min = c.get(Calendar.MINUTE);
+        
+        final Calendar Initial = Calendar.getInstance();
+        int hour = Initial.get(Calendar.HOUR_OF_DAY);
+        int min = Initial.get(Calendar.MINUTE);
 
         return new TimePickerDialog((getActivity()),
         this, hour, min, DateFormat.is24HourFormat(getActivity()));
@@ -51,6 +58,10 @@ public class Activity2 extends AppCompatActivity {
 
         @Override
         public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+            Calendar currentTime = Calendar.getInstance();
+            currentTime.set(Calendar.HOUR_OF_DAY, hourOfDay);
+            currentTime.set(Calendar.MINUTE, minute);
+
 
         }
     }
@@ -61,4 +72,5 @@ public class Activity2 extends AppCompatActivity {
         DialogFragment newFragment = new TimePickerFragment();
         newFragment.show(getSupportFragmentManager(), "timePicker");
     }
+
 }
