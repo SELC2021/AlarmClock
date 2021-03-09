@@ -6,8 +6,11 @@ import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.PowerManager;
 import android.widget.Toast;
+
+import androidx.annotation.RequiresApi;
 
 public class Alarm extends BroadcastReceiver
 {
@@ -24,12 +27,13 @@ public class Alarm extends BroadcastReceiver
         wl.release();
     }
 
-    public void setAlarm(Context context)
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    public void setAlarm(Context context, long alarmTime)
     {
         AlarmManager am =( AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
         Intent i = new Intent(context, Alarm.class);
         PendingIntent pi = PendingIntent.getBroadcast(context, 0, i, 0);
-        am.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), 1000 * 60 * 10, pi); // Millisec * Second * Minute
+        am.setExact(AlarmManager.RTC_WAKEUP, alarmTime, pi);
     }
 
     public void cancelAlarm(Context context)
