@@ -22,8 +22,24 @@
         android:layout_height="wrap_content"
         android:text="Set Alarm"
         tools:layout_editor_absoluteX="120dp"
-        tools:layout_editor_absoluteY="518dp" />
+        tools:layout_editor_absoluteY="518dp"
         android:onClick="sendMessage" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginStart="65dp"
+        android:layout_marginLeft="65dp"
+        android:layout_marginTop="244dp"
+        android:layout_marginEnd="101dp"
+        android:layout_marginRight="101dp"
+        android:onClick="fileManager"
+        android:text="File Manager" />
 
 
 </RelativeLayout>
