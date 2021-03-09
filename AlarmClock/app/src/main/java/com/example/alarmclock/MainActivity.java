@@ -38,23 +38,10 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+
     public void openActivity2(){
         Intent intent = new Intent(this, Activity2.class);
         startActivity(intent);
-    }
-
-
-
-
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-    public void createAlarm(TimePicker timePicker) {
-        Calendar cal = Calendar.getInstance();
-        cal.set(Calendar.HOUR, timePicker.getCurrentHour());
-        cal.set(Calendar.MINUTE, timePicker.getCurrentMinute());
-
-        long time = cal.getTimeInMillis();
-        Alarm alarm = new Alarm();
-        alarm.setAlarm(this, time);
     }
 
     public void makeNoise(View view)
