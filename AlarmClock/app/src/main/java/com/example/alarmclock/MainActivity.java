@@ -8,6 +8,10 @@ import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.DatePicker;
+import android.widget.TimePicker;
+
+import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -20,7 +24,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-    public void createAlarm(long time) {
+    public void createAlarm(TimePicker timePicker) {
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.HOUR, timePicker.getCurrentHour());
+        cal.set(Calendar.MINUTE, timePicker.getCurrentMinute());
+
+        long time = cal.getTimeInMillis();
         Alarm alarm = new Alarm();
         alarm.setAlarm(this, time);
     }
