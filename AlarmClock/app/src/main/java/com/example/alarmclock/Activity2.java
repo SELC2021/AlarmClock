@@ -21,9 +21,8 @@ import java.util.Date;
  * inputTime recieves the time desired for when the alarm is set
  */
 public class Activity2 extends AppCompatActivity {
-    int inputTime;
-    private Button inpuTime;
-    private static Calendar alarmTime;
+
+    DialogFragment newFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,21 +34,7 @@ public class Activity2 extends AppCompatActivity {
 
     }
     public void onClick(View v){
-    inputTime = Integer.valueOf(inpuTime.getText().toString());
 
-            showText(String.valueOf(inputTime));
-
-    }
-
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-    public void createAlarm(TimePicker timePicker) {
-        Calendar cal = Calendar.getInstance();
-        cal.set(Calendar.HOUR, timePicker.getCurrentHour());
-        cal.set(Calendar.MINUTE, timePicker.getCurrentMinute());
-
-        long time = alarmTime.getTimeInMillis();
-        Alarm alarm = new Alarm();
-        alarm.setAlarm(this, time);
     }
 
     public void showText(String text){
@@ -57,7 +42,7 @@ public class Activity2 extends AppCompatActivity {
     }
 
     public void showTimePickerDialog(View v) {
-        DialogFragment newFragment = new timPickerFragment.TimePickerFragment();
+        newFragment = new TimePickerFragment();
         newFragment.show(getSupportFragmentManager(), "timePicker");
     }
 

@@ -2,17 +2,22 @@ package com.example.alarmclock;
 
 import android.app.Dialog;
 import android.app.TimePickerDialog;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.view.View;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.DialogFragment;
 
 import java.util.Calendar;
 
 public class TimePickerFragment extends DialogFragment implements TimePickerDialog.OnTimeSetListener {
+
+    private Calendar alarmTime;
+
     @Override
     public Dialog onCreateDialog(Bundle saveTime) {
 
@@ -22,15 +27,17 @@ public class TimePickerFragment extends DialogFragment implements TimePickerDial
 
         return new TimePickerDialog((getActivity()),
                 this, hour, min, DateFormat.is24HourFormat(getActivity()));
-
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-        Calendar currentTime = Calendar.getInstance();
-        currentTime.set(Calendar.HOUR_OF_DAY, hourOfDay);
-        currentTime.set(Calendar.MINUTE, minute);
+        alarmTime = Calendar.getInstance();
+        alarmTime.set(Calendar.HOUR_OF_DAY, hourOfDay);
+        alarmTime.set(Calendar.MINUTE, minute);
 
-
+        long time = alarmTime.getTimeInMillis();
+        Alarm alarm = new Alarm();
+        alarm.setAlarm(this.getContext(), time);
     }
 }
