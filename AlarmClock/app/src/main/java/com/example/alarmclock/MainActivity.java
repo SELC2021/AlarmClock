@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
     private Button goToAlarmPage;
     private MediaPlayer mp;
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +37,10 @@ public class MainActivity extends AppCompatActivity {
             }
 
         });
+
+        Alarm alarm = new Alarm();
+        alarm.setAlarm(this);
+        //alarm.onReceive(this, getIntent());
 
     }
 
