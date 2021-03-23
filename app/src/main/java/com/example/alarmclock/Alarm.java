@@ -64,7 +64,7 @@ public class Alarm extends BroadcastReceiver
         alarmManager.cancel(sender);
     }
 
-    private void createNotificationChannel() {
+    private void createNotificationChannel(Context context) {
         // Create the NotificationChannel, but only on API 26+ because
         // the NotificationChannel class is new and not in the support library
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -75,7 +75,7 @@ public class Alarm extends BroadcastReceiver
             channel.setDescription(description);
             // Register the channel with the system; you can't change the importance
             // or other notification behaviors after this
-            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            NotificationManager notificationManager = context.getSystemService(NotificationManager.class);
             notificationManager.createNotificationChannel(channel);
         }
     }
