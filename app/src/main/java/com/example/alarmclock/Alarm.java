@@ -18,14 +18,12 @@ import androidx.core.app.NotificationManagerCompat;
 
 import java.util.Random;
 
-public class Alarm extends BroadcastReceiver
-{
+public class Alarm extends BroadcastReceiver {
     private final String CHANNEL_ID = "";
     private PendingIntent pi;
 
     @Override
-    public void onReceive(Context context, Intent intent)
-    {
+    public void onReceive(Context context, Intent intent) {
         PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
         @SuppressLint("InvalidWakeLockTag") PowerManager.WakeLock wl = pm.newWakeLock(PowerManager.FULL_WAKE_LOCK, "");
         wl.acquire();
@@ -48,16 +46,14 @@ public class Alarm extends BroadcastReceiver
     }
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-    public void setAlarm(Context context)
-    {
-        AlarmManager am =( AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
+    public void setAlarm(Context context) {
+        AlarmManager am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         Intent i = new Intent(context, Alarm.class);
         pi = PendingIntent.getBroadcast(context, 0, i, 0);
         am.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), 1000 * 60 * 1, pi); // 1000 * 60 * minute interval
     }
 
-    public void cancelAlarm(Context context)
-    {
+    public void cancelAlarm(Context context) {
         Intent intent = new Intent(context, Alarm.class);
         PendingIntent sender = PendingIntent.getBroadcast(context, 0, intent, 0);
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);

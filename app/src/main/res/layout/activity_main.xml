@@ -21,17 +21,17 @@
         android:id="@+id/alarmSet"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Set Alarm"
+        android:layout_alignParentRight="true"
         android:layout_alignParentBottom="false"
-        android:layout_alignParentRight="true" />
-        android:onClick="sendMessage" />
+        android:text="Set Alarm" />
+    android:onClick="sendMessage" />
 
 
-        <AnalogClock
-            android:id="@+id/simpleAnalogClock"
-            android:layout_marginTop="20dp"
-            android:layout_marginLeft="120dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+    <AnalogClock
+        android:id="@+id/simpleAnalogClock"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="120dp"
+        android:layout_marginTop="20dp" />
 
 </RelativeLayout>

@@ -1,21 +1,14 @@
 package com.example.alarmclock;
 
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.os.Bundle;
-
-import android.app.Activity;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.DatePicker;
-import android.widget.TimePicker;
 
-import java.util.Calendar;
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -46,17 +39,16 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void openActivity2(){
+    public void openActivity2() {
         Intent intent = new Intent(this, Activity2.class);
         startActivity(intent);
     }
 
-    public void makeNoise(View view)
-    {
+    public void makeNoise(View view) {
         try {
             mp = MediaPlayer.create(this, R.raw.loud_alarm_clock);
             mp.start();
-        } catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

@@ -1,38 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
     tools:context=".Activity2">
+
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="ALARM PAGE"
+        android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:text="ALARM PAGE" />
 
 
-
-<!--    <EditText-->
-<!--        android:id="@+id/editTextTime"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:padding="5dp"-->
-<!--        android:gravity="center_horizontal"-->
-<!--        android:background="#333"-->
-<!--        android:textColor="#fff" />-->
+    <!--    <EditText-->
+    <!--        android:id="@+id/editTextTime"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:padding="5dp"-->
+    <!--        android:gravity="center_horizontal"-->
+    <!--        android:background="#333"-->
+    <!--        android:textColor="#fff" />-->
     <Button
         android:layout_width="match_parent"
 
         android:layout_height="wrap_content"
-        android:text="Set Alarm"
         android:background="#333"
-        android:textColor="#fff"
+        android:onClick="showTimePickerDialog"
+        android:text="Set Alarm"
 
-        android:onClick="showTimePickerDialog" />
+        android:textColor="#fff" />
 
     <Button
         android:id="@+id/seeAlarmState"
@@ -44,7 +43,7 @@
 
 
     android:hint="Set Time"
-        android:inputType="time" />
+    android:inputType="time" />
     android:onClick="sendMessage" />
 
 </RelativeLayout>

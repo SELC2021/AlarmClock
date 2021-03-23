@@ -9,7 +9,6 @@ import android.provider.AlarmClock;
 import android.text.format.DateFormat;
 import android.view.View;
 import android.widget.TimePicker;
-import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.DialogFragment;
@@ -42,16 +41,16 @@ public class TimePickerFragment extends DialogFragment implements TimePickerDial
         Alarm alarm = new Alarm();
 
 
-
         //alarm.setAlarm(this.getContext(), time);
 
     }
-   public void onClick(View v){
-       Intent intent = new Intent(AlarmClock.ACTION_SET_ALARM);
-       intent.putExtra(AlarmClock.EXTRA_HOUR, Integer.parseInt(alarmTime.toString()));
-       intent.putExtra(AlarmClock.EXTRA_MINUTES, Integer.parseInt(alarmTime.toString()));
+
+    public void onClick(View v) {
+        Intent intent = new Intent(AlarmClock.ACTION_SET_ALARM);
+        intent.putExtra(AlarmClock.EXTRA_HOUR, Integer.parseInt(alarmTime.toString()));
+        intent.putExtra(AlarmClock.EXTRA_MINUTES, Integer.parseInt(alarmTime.toString()));
 
 
-   }
+    }
 
 }
