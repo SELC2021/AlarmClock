@@ -57,6 +57,10 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, Activity2.class);
         startActivity(intent);
     }
+    public void openSnoozeDismissPage() {
+        Intent intent = new Intent(this, dismiss_snooze.class);
+        startActivity(intent);
+    }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
