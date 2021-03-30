@@ -8,8 +8,11 @@ import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Build;
 import android.os.PowerManager;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
@@ -21,6 +24,8 @@ import java.util.Random;
 public class Alarm extends BroadcastReceiver {
     private final String CHANNEL_ID = "";
     private PendingIntent pi;
+    private MediaPlayer mp;
+    private Uri uriSound;
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -42,6 +47,8 @@ public class Alarm extends BroadcastReceiver {
 
         Random notification_id = new Random();
         notificationManager.notify(notification_id.nextInt(100), builder.build());
+
+        makeNoise(context);
 
         wl.release();
     }
@@ -79,5 +86,28 @@ public class Alarm extends BroadcastReceiver {
             NotificationManager notificationManager = context.getSystemService(NotificationManager.class);
             notificationManager.createNotificationChannel(channel);
         }
+    }
+
+    public void makeNoise(Context context) {
+        try {
+            System.out.println(uriSound);
+            mp = new MediaPlayer();
+            if(uriSound!=null) {
+                mp.setDataSource(context, uriSound);
+                mp.setVolume(1,1);
+                mp.prepare();
+
+
+            }else {
+                mp = MediaPlayer.create(context, R.raw.loud_alarm_clock);
+            }
+            mp.start();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void stopNoise(View view) {
+        mp.release();
     }
 }
