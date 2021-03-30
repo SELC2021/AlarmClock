@@ -28,7 +28,6 @@ public class Alarm extends BroadcastReceiver {
         @SuppressLint("InvalidWakeLockTag") PowerManager.WakeLock wl = pm.newWakeLock(PowerManager.FULL_WAKE_LOCK, "");
         wl.acquire();
 
-        // Put here YOUR code.
         Toast.makeText(context, "Alarm", Toast.LENGTH_LONG).show(); // For example
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "alarmChannelID")
@@ -51,6 +50,9 @@ public class Alarm extends BroadcastReceiver {
         Intent i = new Intent(context, Alarm.class);
         pi = PendingIntent.getBroadcast(context, 0, i, 0);
         am.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), 1000 * 60 * 1, pi); // 1000 * 60 * minute interval
+
+        Toast toast = Toast.makeText(context, "Alarm", Toast.LENGTH_LONG);
+        toast.show();
     }
 
     public void cancelAlarm(Context context) {

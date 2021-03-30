@@ -20,7 +20,7 @@ public class Activity2 extends AppCompatActivity {
         setContentView(R.layout.activity_2);
 
 
-        //  inpuTime = (Button) findViewById(R.id.inputTime);
+        //  inputTime = (Button) findViewById(R.id.inputTime);
 
     }
 
