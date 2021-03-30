@@ -2,6 +2,7 @@ package com.example.alarmclock;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 
 import android.os.Bundle;
 
@@ -14,6 +15,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import java.util.Calendar;
 
@@ -28,17 +30,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        goToAlarmPage = (Button) findViewById(R.id.alarmSet);
-        goToAlarmPage.setOnClickListener(new View.OnClickListener() {
-
-
-            @Override
-            public void onClick(View v) {
-
-                openActivity2();
-            }
-
-        });
 
         Alarm alarm = new Alarm();
         alarm.setAlarm(this);
@@ -46,10 +37,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void openActivity2(){
-        Intent intent = new Intent(this, Activity2.class);
-        startActivity(intent);
-    }
+
 
     public void makeNoise(View view)
     {
@@ -64,4 +52,18 @@ public class MainActivity extends AppCompatActivity {
     public void stopNoise(View view) {
         mp.release();
     }
+
+//secondPAgeMergeToMain
+DialogFragment newFragment;
+
+    public void showText(String text){
+        Toast.makeText(MainActivity.this, text, Toast.LENGTH_SHORT).show();
+    }
+
+    public void showTimePickerDialog(View v) {
+        newFragment = new TimePickerFragment();
+        newFragment.show(getSupportFragmentManager(), "timePicker");
+    }
+
 }
+
