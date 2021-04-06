@@ -33,7 +33,8 @@ public class Alarm extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         //MainActivity.openSnoozeDismissPage();
         Intent notificationIntent = new Intent(context,dismiss_snooze.class);
-        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, notificationIntent, 0);
+        pi = PendingIntent.getActivity(context, 0, notificationIntent, 0);
+
 
         PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
         @SuppressLint("InvalidWakeLockTag") PowerManager.WakeLock wl = pm.newWakeLock(PowerManager.FULL_WAKE_LOCK, "");
