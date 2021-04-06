@@ -1,10 +1,12 @@
 package com.example.alarmclock;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class dismiss_snooze extends AppCompatActivity {
@@ -34,9 +36,12 @@ public class dismiss_snooze extends AppCompatActivity {
         snooze.setOnClickListener(new View.OnClickListener() {
 
 
+            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onClick(View v) {
                 //snooze
+                Alarm alarm = new Alarm();
+                alarm.setAlarm(getApplicationContext());
             }
 
         });

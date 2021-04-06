@@ -14,7 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class MainActivity extends AppCompatActivity {
 
     private MediaPlayer mp;
-    private Uri uriSound;
+
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
         });
 
-        Alarm alarm = new Alarm(uriSound);
+        Alarm alarm = new Alarm();
         alarm.setAlarm(this);
         Button openFile = (Button) this.findViewById(R.id.changeSound);
         openFile.setOnClickListener(new View.OnClickListener() {
@@ -65,11 +65,12 @@ public class MainActivity extends AppCompatActivity {
 
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK && requestCode == 10) {
-            uriSound = data.getData();
+            ((application)getApplication()).urisound = data.getData();
         }
     }
 
     public void makeNoise(View view) {
+        Uri uriSound = ((application)getApplication()).urisound;
         try {
             System.out.println(uriSound);
             mp = new MediaPlayer();

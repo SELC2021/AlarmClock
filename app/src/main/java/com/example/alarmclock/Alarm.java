@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
@@ -25,11 +26,10 @@ public class Alarm extends BroadcastReceiver {
     private final String CHANNEL_ID = "";
     private PendingIntent pi;
     private MediaPlayer mp;
-    private Uri uriSound;
 
-    public Alarm(Uri uriSound){
-        this.uriSound=uriSound;
-    }
+
+    public Alarm(){}//Need to find a way to get uriSound in timepicker fragment
+
 
 
     @Override
@@ -97,6 +97,7 @@ public class Alarm extends BroadcastReceiver {
     }
 
     public void makeNoise(Context context) {
+        Uri uriSound = ((application)context).urisound;
         try {
             System.out.println(uriSound);
             mp = new MediaPlayer();
