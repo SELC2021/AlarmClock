@@ -13,7 +13,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button goToAlarmPage;
     private MediaPlayer mp;
     private Uri uriSound;
 
@@ -23,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        goToAlarmPage = (Button) findViewById(R.id.alarmSet);
+        Button goToAlarmPage = (Button) findViewById(R.id.alarmSet);
         goToAlarmPage.setOnClickListener(new View.OnClickListener() {
 
 
@@ -35,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
         });
 
-        Alarm alarm = new Alarm();
+        Alarm alarm = new Alarm(uriSound);
         alarm.setAlarm(this);
         Button openFile = (Button) this.findViewById(R.id.changeSound);
         openFile.setOnClickListener(new View.OnClickListener() {

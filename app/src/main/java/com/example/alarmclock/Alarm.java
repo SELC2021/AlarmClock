@@ -27,6 +27,9 @@ public class Alarm extends BroadcastReceiver {
     private MediaPlayer mp;
     private Uri uriSound;
 
+    public Alarm(Uri uriSound){
+        this.uriSound=uriSound;
+    }
 
 
     @Override
