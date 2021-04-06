@@ -2,4 +2,6 @@
     <string name="app_name">AlarmClock</string>
     <string name="noise">Noise</string>
     <string name="pick_time" />
+    <string name="snooze">Snooze</string>
+    <string name="dismiss">dismiss</string>
 </resources>
