@@ -111,16 +111,19 @@ public class Alarm extends BroadcastReceiver {
             mChannel.setShowBadge(false);
             notificationManager.createNotificationChannel(mChannel);
         }
-
+        Intent resultIntent = new Intent(context, dismiss_snooze.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(context,1,resultIntent,PendingIntent.FLAG_UPDATE_CURRENT);
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, CHANNEL_ID)
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setContentTitle("Alarm!!!")
-                .setContentText("This is an alarm.");
+                .setContentText("This is an alarm.")
+                .setAutoCancel(true)
+                .setContentIntent(pendingIntent);
 
-        Intent resultIntent = new Intent(context, MainActivity.class);
+        Intent resultIntent1 = new Intent(context, MainActivity.class);
         TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
         stackBuilder.addParentStack(MainActivity.class);
-        stackBuilder.addNextIntent(resultIntent);
+        stackBuilder.addNextIntent(resultIntent1);
         PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
         builder.setContentIntent(resultPendingIntent);
         notificationManager.notify(NOTIFICATION_ID, builder.build());

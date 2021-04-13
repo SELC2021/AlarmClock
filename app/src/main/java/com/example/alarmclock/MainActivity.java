@@ -41,7 +41,18 @@ public class MainActivity extends AppCompatActivity {
             }
 
         });
+        Button butt = (Button) findViewById(R.id.bigTopcan);
+        butt.setOnClickListener(new View.OnClickListener() {
 
+
+            @Override
+            public void onClick(View v) {
+                //makeNoise(v);
+                openSnoozeDismissPage();
+                System.out.println("snooze page button");
+            }
+
+        });
         Alarm alarm = new Alarm();
         alarm.setAlarm(this);
 

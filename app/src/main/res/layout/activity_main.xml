@@ -46,4 +46,20 @@
         android:layout_marginBottom="4dp"
         android:text="change sound" />
 
+    <Button
+        android:id="@+id/bigTopcan"
+        android:layout_width="111dp"
+        android:layout_height="33dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="144dp"
+        android:layout_marginLeft="144dp"
+        android:layout_marginEnd="157dp"
+        android:layout_marginRight="157dp"
+        android:layout_marginBottom="272dp"
+        android:text="Button" />
+
 </RelativeLayout>
