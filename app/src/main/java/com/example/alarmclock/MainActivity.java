@@ -43,8 +43,8 @@ public class MainActivity extends AppCompatActivity {
 
         });
 
-        Alarm alarm = new Alarm();
-        alarm.setAlarm(this);
+        //Alarm alarm = new Alarm();
+        //alarm.setAlarm(this, System.currentTimeMillis(), 10);
 
         Button openFile = (Button) this.findViewById(R.id.changeSound);
         openFile.setOnClickListener(new View.OnClickListener() {

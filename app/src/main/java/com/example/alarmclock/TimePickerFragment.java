@@ -39,18 +39,13 @@ public class TimePickerFragment extends DialogFragment implements TimePickerDial
 
         long time = alarmTime.getTimeInMillis();
         Alarm alarm = new Alarm();
-
-
-        //alarm.setAlarm(this.getContext(), time);
-
+        alarm.setAlarm(this.getContext(), time, 10);
     }
 
     public void onClick(View v) {
         Intent intent = new Intent(AlarmClock.ACTION_SET_ALARM);
         intent.putExtra(AlarmClock.EXTRA_HOUR, Integer.parseInt(alarmTime.toString()));
         intent.putExtra(AlarmClock.EXTRA_MINUTES, Integer.parseInt(alarmTime.toString()));
-
-
     }
 
 }

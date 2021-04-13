@@ -45,11 +45,11 @@ public class Alarm extends BroadcastReceiver {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-    public void setAlarm(Context context) {
+    public void setAlarm(Context context, Long time, int snoozeTimeMinutes) {
         AlarmManager am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         Intent i = new Intent(context, Alarm.class);
         pi = PendingIntent.getBroadcast(context, 0, i, 0);
-        am.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), 1000 * 60 * 1, pi); // 1000 * 60 * minute interval
+        am.setRepeating(AlarmManager.RTC_WAKEUP, time, 1000 * 60 * snoozeTimeMinutes, pi); // 1000 * 60 * minute interval
     }
 
     public void cancelAlarm(Context context) {
