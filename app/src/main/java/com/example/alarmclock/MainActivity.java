@@ -21,8 +21,9 @@ import androidx.core.app.NotificationCompat;
 
 public class MainActivity extends AppCompatActivity {
 
+    private Button goToAlarmPage;
     private MediaPlayer mp;
-
+    private Uri uriSound;
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
@@ -30,29 +31,18 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button goToAlarmPage = (Button) findViewById(R.id.alarmSet);
+        goToAlarmPage = (Button) findViewById(R.id.alarmSet);
         goToAlarmPage.setOnClickListener(new View.OnClickListener() {
 
 
             @Override
             public void onClick(View v) {
-                //makeNoise(v);
+                makeNoise(v);
                 openActivity2();
             }
 
         });
-        Button butt = (Button) findViewById(R.id.bigTopcan);
-        butt.setOnClickListener(new View.OnClickListener() {
 
-
-            @Override
-            public void onClick(View v) {
-                //makeNoise(v);
-                openSnoozeDismissPage();
-                System.out.println("snooze page button");
-            }
-
-        });
         Alarm alarm = new Alarm();
         alarm.setAlarm(this);
 
@@ -83,12 +73,11 @@ public class MainActivity extends AppCompatActivity {
 
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK && requestCode == 10) {
-            ((application)getApplication()).urisound = data.getData();
+            uriSound = data.getData();
         }
     }
 
     public void makeNoise(View view) {
-        Uri uriSound = ((application)getApplication()).urisound;
         try {
             System.out.println(uriSound);
             mp = new MediaPlayer();
