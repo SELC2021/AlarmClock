@@ -43,9 +43,8 @@ public class MainActivity extends AppCompatActivity {
 
         });
 
-        //Alarm alarm = new Alarm();
-        //alarm.setAlarm(this);
-        alarmNotification(this);
+        Alarm alarm = new Alarm();
+        alarm.setAlarm(this);
 
         Button openFile = (Button) this.findViewById(R.id.changeSound);
         openFile.setOnClickListener(new View.OnClickListener() {
@@ -59,10 +58,7 @@ public class MainActivity extends AppCompatActivity {
 
         });
 
-        //alarm.onReceive(this, getIntent());
-
     }
-
     public void openActivity2() {
         Intent intent = new Intent(this, Activity2.class);
         startActivity(intent);
@@ -71,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, dismiss_snooze.class);
         startActivity(intent);
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
@@ -78,43 +75,6 @@ public class MainActivity extends AppCompatActivity {
         if (resultCode == RESULT_OK && requestCode == 10) {
             uriSound = data.getData();
         }
-    }
-
-    private void alarmNotification(Context context)
-    {
-        int NOTIFICATION_ID = 4655;
-        NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-
-        String CHANNEL_ID = "my_channel_01";
-
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-            Toast.makeText(context, "Alarm!!!", Toast.LENGTH_LONG).show();
-
-            CharSequence name = "my_channel";
-            String Description = "Notification channel for alarm app.";
-            int importance = NotificationManager.IMPORTANCE_HIGH;
-            NotificationChannel mChannel = new NotificationChannel(CHANNEL_ID, name, importance);
-            mChannel.setDescription(Description);
-            mChannel.enableLights(true);
-            mChannel.setLightColor(Color.RED);
-            mChannel.enableVibration(true);
-            mChannel.setVibrationPattern(new long[]{100, 200, 300, 400, 500, 400, 300, 200, 400});
-            mChannel.setShowBadge(false);
-            notificationManager.createNotificationChannel(mChannel);
-        }
-
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, CHANNEL_ID)
-                .setSmallIcon(R.mipmap.ic_launcher)
-                .setContentTitle("Alarm!!!")
-                .setContentText("This is an alarm.");
-
-        Intent resultIntent = new Intent(context, MainActivity.class);
-        TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
-        stackBuilder.addParentStack(MainActivity.class);
-        stackBuilder.addNextIntent(resultIntent);
-        PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
-        builder.setContentIntent(resultPendingIntent);
-        notificationManager.notify(NOTIFICATION_ID, builder.build());
     }
 
     public void makeNoise(View view) {

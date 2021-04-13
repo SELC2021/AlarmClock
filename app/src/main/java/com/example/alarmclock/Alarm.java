@@ -38,20 +38,8 @@ public class Alarm extends BroadcastReceiver {
         @SuppressLint("InvalidWakeLockTag") PowerManager.WakeLock wl = pm.newWakeLock(PowerManager.FULL_WAKE_LOCK, "");
         wl.acquire();
 
-        //Toast.makeText(context, "Alarm!!!", Toast.LENGTH_LONG).show(); // For example
-
-//        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, NotificationChannel.DEFAULT_CHANNEL_ID)
-//                .setContentTitle("Alarm!!!")
-//                .setContentText("This is an alarm.")
-//                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-//                .setContentIntent(pi)
-//                .setAutoCancel(true);
-//
-//        notificationManager.notify(notification_id, builder.build());
-
         alarmNotification(context);
-
-        //makeNoise(context);
+        makeNoise(context);
 
         wl.release();
     }
@@ -62,8 +50,6 @@ public class Alarm extends BroadcastReceiver {
         Intent i = new Intent(context, Alarm.class);
         pi = PendingIntent.getBroadcast(context, 0, i, 0);
         am.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), 1000 * 60 * 1, pi); // 1000 * 60 * minute interval
-
-        //createNotificationChannel(context);
     }
 
     public void cancelAlarm(Context context) {
@@ -71,24 +57,6 @@ public class Alarm extends BroadcastReceiver {
         PendingIntent sender = PendingIntent.getBroadcast(context, 0, intent, 0);
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         alarmManager.cancel(sender);
-    }
-
-
-    private void createNotificationChannel(Context context) {
-        // Create the NotificationChannel, but only on API 26+ because
-        // the NotificationChannel class is new and not in the support library
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            CharSequence name = "AlarmNotificationChanel";
-            String description = "Notification channel for alarms";
-            int importance = NotificationManager.IMPORTANCE_HIGH;
-            NotificationChannel channel = new NotificationChannel(NotificationChannel.DEFAULT_CHANNEL_ID, name, importance);
-            channel.setDescription(description);
-            channel.enableVibration(true);
-            // Register the channel with the system; you can't change the importance
-            // or other notification behaviors after this
-            notificationManager = context.getSystemService(NotificationManagerCompat.class);
-            notificationManager.createNotificationChannel(channel);
-        }
     }
 
     public void makeNoise(Context context) {
@@ -119,8 +87,9 @@ public class Alarm extends BroadcastReceiver {
         int NOTIFICATION_ID = 234;
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 
+        String CHANNEL_ID = "my_channel_01";
+
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-            String CHANNEL_ID = "my_channel_01";
             CharSequence name = "my_channel";
             String Description = "Notification channel for alarm app.";
             int importance = NotificationManager.IMPORTANCE_HIGH;
@@ -134,7 +103,7 @@ public class Alarm extends BroadcastReceiver {
             notificationManager.createNotificationChannel(mChannel);
         }
 
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, NotificationChannel.DEFAULT_CHANNEL_ID)
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, CHANNEL_ID)
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setContentTitle("Alarm!!!")
                 .setContentText("This is an alarm.");
