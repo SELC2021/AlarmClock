@@ -26,10 +26,15 @@ public class MainActivity extends AppCompatActivity {
     private Button goToAlarmPage;
     private MediaPlayer mp;
     private Uri uriSound;
+    public static Context context;
+    public static long alarmTime;
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        context = this;
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -62,22 +67,18 @@ public class MainActivity extends AppCompatActivity {
         alarm.setAlarm(this,time,10);
 
         Button openFile = (Button) this.findViewById(R.id.changeSound);
-        openFile.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_GET_CONTENT,null);
-                intent.setType("audio/*");
-                startActivityForResult(intent, 10);
-            }
-
+        openFile.setOnClickListener(v -> {
+            Intent intent = new Intent(Intent.ACTION_GET_CONTENT,null);
+            intent.setType("audio/*");
+            startActivityForResult(intent, 10);
         });
-
     }
+
     public void openActivity2() {
         Intent intent = new Intent(this, Activity2.class);
         startActivity(intent);
     }
+
     public void openSnoozeDismissPage() {
         Intent intent = new Intent(this, dismiss_snooze.class);
         startActivity(intent);

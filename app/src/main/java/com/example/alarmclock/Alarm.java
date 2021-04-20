@@ -7,6 +7,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.TaskStackBuilder;
 import android.content.BroadcastReceiver;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -53,11 +54,11 @@ public class Alarm extends BroadcastReceiver {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-    public void setAlarm(Context context, Long time, int snoozeTimeMinutes) {
+    public void setAlarm(Context context, Long time) {
         AlarmManager am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         Intent i = new Intent(context, Alarm.class);
         pi = PendingIntent.getBroadcast(context, 0, i, 0);
-        am.setRepeating(AlarmManager.RTC_WAKEUP, time, 1000 * 60 * snoozeTimeMinutes, pi); // 1000 * 60 * minute interval
+        am.set(AlarmManager.RTC_WAKEUP, time, pi);
     }
 
     public void cancelAlarm(Context context) {
@@ -76,9 +77,7 @@ public class Alarm extends BroadcastReceiver {
                 mp.setDataSource(context, uriSound);
                 mp.setVolume(1,1);
                 mp.prepare();
-
-
-            }else {
+            } else {
                 mp = MediaPlayer.create(context, R.raw.loud_alarm_clock);
             }
             mp.start();
@@ -111,10 +110,14 @@ public class Alarm extends BroadcastReceiver {
             mChannel.setShowBadge(false);
             notificationManager.createNotificationChannel(mChannel);
         }
+
+        Uri soundUri = Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://"+ context.getPackageName() + "/" + R.raw.loud_alarm_clock);
+
         Intent resultIntent = new Intent(context, dismiss_snooze.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(context,1,resultIntent,PendingIntent.FLAG_UPDATE_CURRENT);
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, CHANNEL_ID)
                 .setSmallIcon(R.mipmap.ic_launcher)
+                .setSound(soundUri)
                 .setContentTitle("Alarm!!!")
                 .setContentText("This is an alarm.")
                 .setAutoCancel(true)
