@@ -10,17 +10,17 @@
         android:id="@+id/snooze"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Snooze"
-        app:layout_constraintBottom_toTopOf="@+id/button2"
+        android:text="@string/snooze"
+        app:layout_constraintBottom_toTopOf="@+id/dismiss"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.984"
         tools:layout_editor_absoluteX="0dp" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/dismiss"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="dismiss"
+        android:text="@string/dismiss"
         app:layout_constraintBottom_toBottomOf="parent"
         tools:layout_editor_absoluteX="0dp" />
 

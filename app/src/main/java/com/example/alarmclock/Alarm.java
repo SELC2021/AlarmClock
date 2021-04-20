@@ -19,6 +19,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
@@ -29,11 +30,18 @@ public class Alarm extends BroadcastReceiver {
     private NotificationManagerCompat notificationManager;
     private PendingIntent pi;
     private MediaPlayer mp;
-    private Uri uriSound;
+
+
+    public Alarm(){}//Need to find a way to get uriSound in timepicker fragment
+
+
 
     @Override
     public void onReceive(Context context, Intent intent) {
         //MainActivity.openSnoozeDismissPage();
+        Intent notificationIntent = new Intent(context,dismiss_snooze.class);
+        pi = PendingIntent.getActivity(context, 0, notificationIntent, 0);
+
 
         PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
         @SuppressLint("InvalidWakeLockTag") PowerManager.WakeLock wl = pm.newWakeLock(PowerManager.FULL_WAKE_LOCK, "");
@@ -61,6 +69,7 @@ public class Alarm extends BroadcastReceiver {
     }
 
     public void makeNoise(Context context) {
+        Uri uriSound = ((application)context).urisound;
         try {
             System.out.println(uriSound);
             mp = new MediaPlayer();
@@ -104,16 +113,20 @@ public class Alarm extends BroadcastReceiver {
 
         Uri soundUri = Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://"+ context.getPackageName() + "/" + R.raw.loud_alarm_clock);
 
+        Intent resultIntent = new Intent(context, dismiss_snooze.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(context,1,resultIntent,PendingIntent.FLAG_UPDATE_CURRENT);
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, CHANNEL_ID)
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setSound(soundUri)
                 .setContentTitle("Alarm!!!")
-                .setContentText("This is an alarm.");
+                .setContentText("This is an alarm.")
+                .setAutoCancel(true)
+                .setContentIntent(pendingIntent);
 
-        Intent resultIntent = new Intent(context, MainActivity.class);
+        Intent resultIntent1 = new Intent(context, MainActivity.class);
         TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
         stackBuilder.addParentStack(MainActivity.class);
-        stackBuilder.addNextIntent(resultIntent);
+        stackBuilder.addNextIntent(resultIntent1);
         PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
         builder.setContentIntent(resultPendingIntent);
         notificationManager.notify(NOTIFICATION_ID, builder.build());

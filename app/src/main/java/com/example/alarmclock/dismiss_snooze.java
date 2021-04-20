@@ -1,7 +1,12 @@
 package com.example.alarmclock;
 
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class dismiss_snooze extends AppCompatActivity {
@@ -13,7 +18,33 @@ public class dismiss_snooze extends AppCompatActivity {
 
 
         //  inputTime = (Button) findViewById(R.id.inputTime);
+        Button snooze = (Button) this.findViewById(R.id.snooze);
+        snooze.setOnClickListener(new View.OnClickListener() {
 
+
+            @Override
+            public void onClick(View v) {
+                Intent intentService = new Intent(getApplicationContext(), Alarm.class);
+                getApplicationContext().stopService(intentService);
+                finish();
+            }
+
+        });
+
+        //  inputTime = (Button) findViewById(R.id.inputTime);
+        Button dismiss = (Button) this.findViewById(R.id.dismiss);
+        snooze.setOnClickListener(new View.OnClickListener() {
+
+
+            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+            @Override
+            public void onClick(View v) {
+                //snooze
+                Alarm alarm = new Alarm();
+                alarm.setAlarm(getApplicationContext());
+            }
+
+        });
     }
 }
 
