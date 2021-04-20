@@ -11,10 +11,12 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.media.AudioAttributes;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Build;
 import android.os.PowerManager;
+import android.provider.AlarmClock;
 import android.view.View;
 import android.widget.Toast;
 
@@ -31,24 +33,14 @@ public class Alarm extends BroadcastReceiver {
     private PendingIntent pi;
     private MediaPlayer mp;
 
-
-    public Alarm(){}//Need to find a way to get uriSound in timepicker fragment
-
-
-
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onReceive(Context context, Intent intent) {
-        //MainActivity.openSnoozeDismissPage();
-        Intent notificationIntent = new Intent(context,dismiss_snooze.class);
-        pi = PendingIntent.getActivity(context, 0, notificationIntent, 0);
-
-
         PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
         @SuppressLint("InvalidWakeLockTag") PowerManager.WakeLock wl = pm.newWakeLock(PowerManager.FULL_WAKE_LOCK, "");
         wl.acquire();
 
         alarmNotification(context);
-        makeNoise(context);
 
         wl.release();
     }
@@ -68,34 +60,19 @@ public class Alarm extends BroadcastReceiver {
         alarmManager.cancel(sender);
     }
 
-    public void makeNoise(Context context) {
-        Uri uriSound = ((application)context).urisound;
-        try {
-            System.out.println(uriSound);
-            mp = new MediaPlayer();
-            if(uriSound!=null) {
-                mp.setDataSource(context, uriSound);
-                mp.setVolume(1,1);
-                mp.prepare();
-            } else {
-                mp = MediaPlayer.create(context, R.raw.loud_alarm_clock);
-            }
-            mp.start();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void stopNoise(View view) {
-        mp.release();
-    }
-
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private void alarmNotification(Context context)
     {
         int NOTIFICATION_ID = 234;
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 
         String CHANNEL_ID = "my_channel_01";
+
+        Uri soundUri = Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://"+ context.getPackageName() + "/" + R.raw.loud_alarm_clock);
+
+        AudioAttributes attributes = new AudioAttributes.Builder()
+                .setUsage(AudioAttributes.USAGE_NOTIFICATION)
+                .build();
 
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
             CharSequence name = "my_channel";
@@ -108,27 +85,25 @@ public class Alarm extends BroadcastReceiver {
             mChannel.enableVibration(true);
             mChannel.setVibrationPattern(new long[]{100, 200, 300, 400, 500, 400, 300, 200, 400});
             mChannel.setShowBadge(false);
+            mChannel.setSound(soundUri, attributes);
             notificationManager.createNotificationChannel(mChannel);
         }
 
-        Uri soundUri = Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://"+ context.getPackageName() + "/" + R.raw.loud_alarm_clock);
-
-        Intent resultIntent = new Intent(context, dismiss_snooze.class);
-        PendingIntent pendingIntent = PendingIntent.getActivity(context,1,resultIntent,PendingIntent.FLAG_UPDATE_CURRENT);
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, CHANNEL_ID)
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setSound(soundUri)
                 .setContentTitle("Alarm!!!")
                 .setContentText("This is an alarm.")
                 .setAutoCancel(true)
-                .setContentIntent(pendingIntent);
+                .setContentIntent(pi);
 
-        Intent resultIntent1 = new Intent(context, dismiss_snooze.class);
+        Intent resultIntent = new Intent(context, MainActivity.class);
         TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
         stackBuilder.addParentStack(MainActivity.class);
-        stackBuilder.addNextIntent(resultIntent1);
+        stackBuilder.addNextIntent(resultIntent);
         PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
         builder.setContentIntent(resultPendingIntent);
+
         notificationManager.notify(NOTIFICATION_ID, builder.build());
     }
 }
