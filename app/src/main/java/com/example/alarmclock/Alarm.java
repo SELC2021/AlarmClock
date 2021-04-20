@@ -120,7 +120,7 @@ public class Alarm extends BroadcastReceiver {
                 .setAutoCancel(true)
                 .setContentIntent(pendingIntent);
 
-        Intent resultIntent1 = new Intent(context, MainActivity.class);
+        Intent resultIntent1 = new Intent(context, dismiss_snooze.class);
         TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
         stackBuilder.addParentStack(MainActivity.class);
         stackBuilder.addNextIntent(resultIntent1);

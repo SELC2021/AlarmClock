@@ -1,5 +1,6 @@
 package com.example.alarmclock;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -9,13 +10,16 @@ import android.widget.Button;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.Calendar;
+
 public class dismiss_snooze extends AppCompatActivity {
+    private Context context;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.alarm_dismiss_snooze);
 
-
+        context = this;
 
         //  inputTime = (Button) findViewById(R.id.inputTime);
         Button snooze = (Button) this.findViewById(R.id.snooze);
@@ -41,7 +45,10 @@ public class dismiss_snooze extends AppCompatActivity {
             public void onClick(View v) {
                 //snooze
                 Alarm alarm = new Alarm();
-                alarm.setAlarm(getApplicationContext());
+                Calendar alarmTime = Calendar.getInstance();
+                long time = alarmTime.getTimeInMillis();
+                time += 1000*60*10;//millis to sec,sec to minute, 10 minutes
+                alarm.setAlarm(context,time,10);
             }
 
         });

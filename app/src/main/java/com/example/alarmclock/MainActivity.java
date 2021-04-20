@@ -19,6 +19,8 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 
+import java.util.Calendar;
+
 public class MainActivity extends AppCompatActivity {
 
     private Button goToAlarmPage;
@@ -37,14 +39,27 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                makeNoise(v);
+                //makeNoise(v);
                 openActivity2();
             }
 
         });
+        Button butt = (Button) findViewById(R.id.bigTopcan);
+        butt.setOnClickListener(new View.OnClickListener() {
 
+
+            @Override
+            public void onClick(View v) {
+               // makeNoise(v);
+                //openActivity2();
+                openSnoozeDismissPage();
+            }
+
+        });
         Alarm alarm = new Alarm();
-        alarm.setAlarm(this);
+        long time = Calendar.getInstance().getTimeInMillis();
+        time+=1000*60*1;
+        alarm.setAlarm(this,time,10);
 
         Button openFile = (Button) this.findViewById(R.id.changeSound);
         openFile.setOnClickListener(new View.OnClickListener() {
