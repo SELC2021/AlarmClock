@@ -48,7 +48,7 @@ public class dismiss_snooze extends AppCompatActivity {
                 Calendar alarmTime = Calendar.getInstance();
                 long time = alarmTime.getTimeInMillis();
                 time += 1000*60*10;//millis to sec,sec to minute, 10 minutes
-                alarm.setAlarm(context,time,10);
+                alarm.setAlarm(context,time);
             }
 
         });

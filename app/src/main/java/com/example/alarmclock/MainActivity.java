@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
         Alarm alarm = new Alarm();
         long time = Calendar.getInstance().getTimeInMillis();
         time+=1000*60*1;
-        alarm.setAlarm(this,time,10);
+        alarm.setAlarm(this,time);
 
         Button openFile = (Button) this.findViewById(R.id.changeSound);
         openFile.setOnClickListener(v -> {
