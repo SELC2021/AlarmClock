@@ -5,13 +5,22 @@
     android:layout_height="match_parent"
 
     tools:context=".Activity2">
-
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/_2735755972_6994ca0a2a_c"
+        android:scaleType="centerCrop"
+        android:contentDescription="Background" />
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
+        android:textColor="#00CC99"
+        android:textStyle="bold"
+        android:textSize="48dp"
+        android:layout_alignParentTop="true"
         android:text="ALARM PAGE" />
 
 
@@ -24,8 +33,8 @@
     <!--        android:background="#333"-->
     <!--        android:textColor="#fff" />-->
     <Button
-        android:layout_width="match_parent"
-
+        android:layout_width="wrap_content"
+        android:layout_alignParentBottom="true"
         android:layout_height="wrap_content"
         android:background="#333"
         android:onClick="showTimePickerDialog"
