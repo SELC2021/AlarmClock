@@ -41,7 +41,6 @@ public class MainActivity extends AppCompatActivity {
         goToAlarmPage = (Button) findViewById(R.id.alarmSet);
         goToAlarmPage.setOnClickListener(new View.OnClickListener() {
 
-
             @Override
             public void onClick(View v) {
                 //makeNoise(v);
@@ -49,22 +48,19 @@ public class MainActivity extends AppCompatActivity {
             }
 
         });
-        Button butt = (Button) findViewById(R.id.bigTopcan);
-        butt.setOnClickListener(new View.OnClickListener() {
 
+        Button butt = (Button) findViewById(R.id.bigTopcan);
+
+        butt.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-               // makeNoise(v);
+                // makeNoise(v);
                 //openActivity2();
                 openSnoozeDismissPage();
             }
 
         });
-        Alarm alarm = new Alarm();
-        long time = Calendar.getInstance().getTimeInMillis();
-        time+=1000*60*1;
-        alarm.setAlarm(this,time);
 
         Button openFile = (Button) this.findViewById(R.id.changeSound);
         openFile.setOnClickListener(v -> {
@@ -115,4 +111,5 @@ public class MainActivity extends AppCompatActivity {
     public void stopNoise(View view) {
         mp.release();
     }
+
 }
